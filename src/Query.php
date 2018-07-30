@@ -11,6 +11,7 @@ class Query extends Container {
 	protected $name;
 	protected $variables;
 	protected $fragmentDefinitions = [];
+	protected $rootPrefix = 'query';	
 
 	public function __construct($name = null, $variables = []) {
 		$this->name = $name;
@@ -27,7 +28,7 @@ class Query extends Container {
 
 	protected function buildQuery() {
 		$signature = $this->renderSignature();
-		return "query $signature{\n" . $this->render(1) . "}\n\n";
+		return $this->rootPrefix." $signature{\n" . $this->render(1) . "}\n\n";
 	}
 
 	protected function renderSignature() {
